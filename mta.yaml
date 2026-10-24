@@ -1,0 +1,77 @@
+_schema-version: "3.3"
+ID: paw-haven-adoption
+version: 1.0.0
+description: Paw Haven animal adoption app with SAP CAP and SAP HANA Cloud
+
+parameters:
+  enable-parallel-deployments: true
+
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - npm install --include=dev
+        - npx cds build --production
+
+modules:
+  - name: paw-haven-adoption-srv
+    type: nodejs
+    path: gen/srv
+    parameters:
+      buildpack: nodejs_buildpack
+      instances: 1
+      memory: 512M
+      disk-quota: 512M
+    provides:
+      - name: srv-api
+        properties:
+          srv-url: ${default-url}
+    requires:
+      - name: paw-haven-db
+      - name: paw-haven-auth
+
+  - name: paw-haven-db-deployer
+    type: hdb
+    path: gen/db
+    parameters:
+      buildpack: nodejs_buildpack
+    requires:
+      - name: paw-haven-db
+        properties:
+          TARGET_CONTAINER: ~{hdi-container-name}
+
+  - name: paw-haven-router
+    type: approuter.nodejs
+    path: app/router
+    parameters:
+      buildpack: nodejs_buildpack
+      instances: 1
+      memory: 256M
+      disk-quota: 256M
+    requires:
+      - name: paw-haven-auth
+      - name: srv-api
+        group: destinations
+        properties:
+          name: srv-api
+          url: ~{srv-url}
+          forwardAuthToken: true
+
+resources:
+  - name: paw-haven-db
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hana
+      service-plan: hdi-shared
+    properties:
+      hdi-container-name: ${service-name}
+
+  - name: paw-haven-auth
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./xs-security.json
+      config:
+        xsappname: paw-haven-adoption
+        tenant-mode: dedicated
