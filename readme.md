@@ -7,11 +7,13 @@ A clean starter project featuring a responsive SAPUI5 interface, CAP OData V4 ba
 ## Requirements
 - Node.js 22 or newer
 - npm
-- Internet access to load SAPUI5 from `https://ui5.sap.com` and animal photos from Unsplash
+- Internet access to npmjs.org (to download backend packages), `https://ui5.sap.com` (SAPUI5 runtime loaded by CDN), and Unsplash (animal photos)
+
+**Important:** `node_modules/` is intentionally not committed to GitHub. Run the install command from the project root to download all dependencies listed in `package.json`. The project uses `@sap/cds` and `express` at runtime, plus `@cap-js/sqlite` and `@sap/cds-dk` for local development/build tools.
 
 ## Run in SAP Business Application Studio
 ```bash
-npm install
+npm install --include=dev
 npm run build
 npm run watch:ui
 ```
