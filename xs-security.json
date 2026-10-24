@@ -1,0 +1,8 @@
+{
+  "xsappname": "paw-haven-adoption",
+  "tenant-mode": "dedicated",
+  "description": "Authentication configuration for Paw Haven",
+  "scopes": [],
+  "attributes": [],
+  "role-templates": []
+}
