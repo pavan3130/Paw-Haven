@@ -1,6 +1,6 @@
 using { pawhaven as db } from '../db/schema';
 
-@path: '/odata/v4/adoption'
+@path: 'adoption'
 service AdoptionService {
   entity Animals as projection on db.Animals;
   entity AdoptionRequests as projection on db.AdoptionRequests;
