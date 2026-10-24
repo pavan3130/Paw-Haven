@@ -4,28 +4,49 @@
   "private": true,
   "type": "module",
   "description": "Paw Haven - SAPUI5 and SAP CAP animal adoption demo",
-  "engines": { "node": ">=22" },
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "start": "cds-serve",
     "watch": "cds watch",
     "build": "cds build --production",
-    "watch:ui": "cds watch --open app/pawhaven/webapp/index.html?sap-ui-xx-viewCache=false"
+    "watch:ui": "cds watch --open app/pawhaven/webapp/index.html?sap-ui-xx-viewCache=false",
+    "install:all": "npm install --include=dev"
   },
   "dependencies": {
-    "@sap/cds": "^10.1.1",
+    "@sap/cds": "^10.2.1",
     "express": "^5.1.0"
   },
   "devDependencies": {
-    "@cap-js/sqlite": "^3.0.0",
+    "@cap-js/sqlite": "^3.1.2",
     "@sap/cds-dk": "^10.2.0"
   },
   "cds": {
     "requires": {
-      "db": { "kind": "sqlite", "credentials": { "url": "db.sqlite" } },
-      "auth": { "kind": "mocked", "users": {
-        "admin@example.com": { "password": "admin", "roles": ["Admin"] },
-        "pavan@example.com": { "password": "pavan", "roles": ["User"] }
-      }}
+      "db": {
+        "kind": "sqlite",
+        "credentials": {
+          "url": "db.sqlite"
+        }
+      },
+      "auth": {
+        "kind": "mocked",
+        "users": {
+          "admin@example.com": {
+            "password": "admin",
+            "roles": [
+              "Admin"
+            ]
+          },
+          "pavan@example.com": {
+            "password": "pavan",
+            "roles": [
+              "User"
+            ]
+          }
+        }
+      }
     }
   }
 }
