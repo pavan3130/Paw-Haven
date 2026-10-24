@@ -1,0 +1,115 @@
+/* Paw Haven — warm, calm and responsive SAP Horizon styling */
+:root {
+  --paw-ink: #203b2e;
+  --paw-green: #34764b;
+  --paw-deep: #245b39;
+  --paw-muted: #6c7c70;
+  --paw-line: #e4eae1;
+  --paw-canvas: #f6f8f2;
+}
+html, body, #content, .sapUiBody { margin: 0; min-height: 100%; background: var(--paw-canvas); }
+.pageShell { box-sizing: border-box; max-width: 1480px; padding: 0 clamp(.75rem,3.3vw,3rem) 1.5rem; margin: 0 auto; color: var(--paw-ink); }
+.topBar.sapMOTB { min-height: 4.7rem; margin: 1rem 0 1.25rem; padding: 0 1.15rem; border: 1px solid var(--paw-line); border-radius: 1.05rem; background: rgba(255,255,255,.96); box-shadow: 0 7px 24px rgba(35,64,43,.045); }
+.brandMark, .footerBrand { gap: .75rem; }
+.brandIcon, .footerBrand .sapUiIcon { color: var(--paw-green); }
+.brandName.sapMTitle { margin: 0; color: var(--paw-ink); font-size: 1.38rem; font-weight: 800; }
+.brandTagline.sapMText { color: #8a978a; font-size: .63rem; letter-spacing: .14em; font-weight: 800; }
+.topStatus .sapMObjStatusText { color: var(--paw-deep); font-size: .82rem; }
+.heroPanel { box-sizing: border-box; margin-bottom: 2.7rem; padding: clamp(1.2rem,4vw,3.4rem); border-radius: 1.45rem; overflow: hidden; background: linear-gradient(118deg,#edf4e8 0%,#f5f7ee 53%,#e2eddf 100%); }
+.heroLayout { gap: clamp(1.5rem,4vw,3.2rem); }
+.heroCopy { flex: 1 1 23rem; min-width: 17rem; }
+.eyebrow .sapMObjStatusText { color: #4d8059; font-size: .71rem; letter-spacing: .12em; font-weight: 800; }
+.heroTitle.sapMTitle { max-width: 13ch; margin-top: .7rem; color: #21442f; font-size: clamp(2.6rem,5.1vw,4.4rem); font-weight: 850; line-height: 1.06; }
+.heroText.sapMText { display: block; max-width: 40rem; margin-top: 1rem; color: #657568; font-size: 1.06rem; line-height: 1.8; }
+.heroActions { gap: 1rem; margin-top: 1.45rem; }
+.primaryHeroButton .sapMBtnInner { min-height: 2.85rem; padding: 0 1.25rem; border-radius: .65rem; background: var(--paw-green); border-color: var(--paw-green); }
+.statRow { gap: 1.7rem; margin-top: 2.1rem; }
+.heroStat { min-width: 8rem; gap: .15rem; }
+.heroStat .sapMObjectNumberText { color: #295a3a; font-size: 1.5rem; font-weight: 800; }
+.heroStat .sapMText { color: #788579; font-size: .77rem; }
+.heroPhotoFrame { position: relative; flex: 1 1 22rem; min-width: 17rem; max-width: 40rem; padding: .6rem; border: 1px solid rgba(255,255,255,.8); border-radius: 1.25rem; background: rgba(255,255,255,.48); box-shadow: 0 20px 45px rgba(33,66,43,.13); }
+.heroPhoto { display: block; height: 23rem; border-radius: .9rem; object-fit: cover; }
+.photoBadge { gap: .8rem; padding: .85rem 1rem .4rem; }
+.photoBadge > .sapUiIcon { color: var(--paw-green); }
+.photoBadge .sapMTitle { color: #294a35; font-size: 1rem; }
+.photoBadge .sapMText { color: #788579; font-size: .8rem; }
+.contentSection { margin: 0 0 2.75rem; scroll-margin-top: 1rem; }
+.sectionIntro { gap: 1rem; margin-bottom: 1.25rem; }
+.sectionTitle.sapMTitle { margin-top: .3rem; color: #274533; font-size: clamp(1.65rem,3vw,2.15rem); font-weight: 800; }
+.sectionSubtitle.sapMText { display: block; max-width: 47rem; margin-top: .35rem; color: #788579; line-height: 1.65; }
+.filterBar { gap: .8rem; margin-bottom: 1.2rem; padding: 1rem; border: 1px solid var(--paw-line); border-radius: .9rem; background: #fff; }
+.filterBar .sapMSFF, .filterBar .sapMSlt { border-radius: .6rem; }
+.resultsText.sapMText { color: #6e7f72; font-size: .84rem; }
+.animalGrid { gap: 1.15rem; align-items: stretch; }
+.animalCard { box-sizing: border-box; flex: 1 1 17rem; max-width: calc(25% - .9rem); min-width: 16rem; overflow: hidden; border: 1px solid var(--paw-line); border-radius: 1.05rem; background: #fff; box-shadow: 0 9px 25px rgba(34,63,41,.055); transition: transform .18s ease,box-shadow .18s ease; }
+.animalCard:hover { transform: translateY(-4px); box-shadow: 0 16px 34px rgba(34,63,41,.11); }
+.animalImageWrap { position: relative; overflow: hidden; background: #e8efe6; }
+.animalPhoto { display: block; height: 13rem; object-fit: cover; }
+.animalStatusBadge { position: absolute; top: .75rem; left: .75rem; padding: .28rem .6rem; border-radius: 99px; background: rgba(255,255,255,.94); box-shadow: 0 2px 8px rgba(0,0,0,.07); }
+.animalDetails { padding: 1rem; gap: .6rem; }
+.animalName.sapMTitle { color: #274533; font-size: 1.3rem; font-weight: 800; }
+.animalBreed.sapMText { color: #819083; font-size: .82rem; }
+.speciesIcon { margin: .2rem .1rem 0 .5rem; color: #5d8b67; }
+.animalMeta { gap: .65rem; }
+.animalMeta .sapMObjStatusText, .animalFooter .sapMObjStatusText { color: #738276; font-size: .72rem; }
+.animalDescription.sapMText { min-height: 3.7rem; color: #6e7c70; font-size: .83rem; line-height: 1.55; }
+.animalFooter { gap: .6rem; padding-top: .7rem; border-top: 1px solid #eef1ec; }
+.animalFooter .sapMObjStatus { max-width: 56%; }
+.meetButton .sapMBtnInner { border-radius: .55rem; }
+.meetButton .sapMBtnContent { font-size: .78rem; }
+.emptyState { padding: 3rem 1rem; gap: .65rem; color: #758477; }
+.secondarySection { padding: 1.2rem; border: 1px solid var(--paw-line); border-radius: 1.2rem; background: #fff; }
+.managementTabs { background: transparent; }
+.managementTabs .sapMITBHead { border-bottom: 1px solid var(--paw-line); }
+.managementTabs .sapMITBSelected .sapMITBText { color: var(--paw-green); }
+.tabPanel { padding: 1.25rem .25rem 1rem; gap: .9rem; }
+.requestsTable { margin-top: .5rem; border: 1px solid #edf0eb; border-radius: .8rem; overflow: hidden; }
+.requestsTable .sapMListTblHeader { background: #f7f9f5; }
+.requestsTable .sapMColumnHeader .sapMText { color: #657568; font-size: .78rem; font-weight: 800; }
+.tableSecondary.sapMText { color: #859185; font-size: .76rem; }
+.kpiGrid { gap: 1rem; margin: 1rem 0; }
+.kpiCard { flex: 1 1 11rem; min-width: 10rem; box-sizing: border-box; padding: 1.15rem; border: 1px solid var(--paw-line); border-radius: .85rem; background: #fbfcf9; gap: .4rem; }
+.kpiCard > .sapMText { color: #788579; font-size: .82rem; }
+.kpiCard .sapMObjectNumberText { color: #294e35; font-size: 1.75rem; font-weight: 800; }
+.kpiCard .sapMObjStatusText { font-size: .75rem; }
+.subsectionTitle.sapMTitle { margin: 1rem 0 .25rem; color: #2b4835; font-size: 1.15rem; font-weight: 800; }
+.adminWarning { margin: .35rem 0 .2rem; }
+.reviewActions { gap: .3rem; }
+.reviewActions .sapMBtnInner { border-radius: .5rem; }
+.siteFooter { gap: 1rem; padding: 1.25rem 0 .2rem; border-top: 1px solid #e5ebe2; }
+.footerBrand .sapMTitle { color: #2f4e39; }
+.siteFooter > .sapMText { color: #8a968b; font-size: .78rem; }
+.siteFooter .sapMObjStatusText { font-size: .76rem; }
+.adoptionForm { gap: .42rem; padding: .25rem 0; }
+.adoptionForm .sapMLabel { margin-top: .45rem; color: #506454; font-size: .83rem; font-weight: 700; }
+.adoptionForm .sapMInputBaseContentWrapper, .adoptionForm .sapMTextAreaInner { border-radius: .55rem; }
+.loadError { margin: .5rem 0 1rem; }
+@media (max-width: 1100px) { .animalCard { max-width: calc(33.333% - .8rem); } .heroPhoto { height: 20rem; } }
+@media (max-width: 800px) {
+  .pageShell { padding: 0 .8rem 1rem; }
+  .topBar.sapMOTB { margin: .55rem 0 .8rem; padding: 0 .6rem; }
+  .topStatus { display: none; }
+  .heroPanel { padding: 1.2rem; margin-bottom: 2rem; border-radius: 1rem; }
+  .heroTitle.sapMTitle { font-size: 2.75rem; }
+  .heroCopy, .heroPhotoFrame { min-width: 100%; max-width: none; }
+  .heroPhoto { height: 17rem; }
+  .statRow { gap: 1rem; margin-top: 1.4rem; }
+  .heroStat { min-width: 7rem; }
+  .contentSection { margin-bottom: 2rem; }
+  .animalCard { max-width: calc(50% - .6rem); min-width: 14rem; }
+  .sectionIntro { align-items: flex-start; }
+  .secondarySection { padding: .6rem; }
+  .tabPanel { padding: 1rem .1rem; }
+  .siteFooter { align-items: flex-start; flex-direction: column; gap: .65rem; }
+}
+@media (max-width: 560px) {
+  .brandTagline.sapMText { font-size: .55rem; }
+  .heroTitle.sapMTitle { font-size: 2.3rem; }
+  .heroText.sapMText { font-size: .94rem; }
+  .heroActions { align-items: flex-start; flex-direction: column; }
+  .heroPhoto { height: 14rem; }
+  .animalCard { max-width: 100%; min-width: 100%; }
+  .animalPhoto { height: 14rem; }
+  .filterBar .sapMSFF, .filterBar .sapMSlt { width: 100% !important; }
+  .statRow { justify-content: space-between; gap: .5rem; }
+}
