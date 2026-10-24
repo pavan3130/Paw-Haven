@@ -1,0 +1,182 @@
+<mvc:View
+  controllerName="com.pawhaven.app.controller.App"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core">
+  <App id="pawHavenApp">
+    <pages>
+      <Page id="homePage" showHeader="false" enableScrolling="true">
+        <content>
+          <VBox class="pageShell" width="100%">
+            <OverflowToolbar class="topBar">
+              <HBox alignItems="Center" class="brandMark">
+                <core:Icon src="sap-icon://heart-2" size="1.5rem" class="brandIcon"/>
+                <VBox>
+                  <Title text="Paw Haven" level="H2" class="brandName"/>
+                  <Text text="ANIMAL ADOPTION &amp; CARE" class="brandTagline"/>
+                </VBox>
+              </HBox>
+              <ToolbarSpacer/>
+              <ObjectStatus text="Every paw deserves a home" icon="sap-icon://favorite" state="Success" class="topStatus"/>
+              <Button text="Refresh" icon="sap-icon://refresh" type="Transparent" press=".onRefresh" tooltip="Refresh animals and requests"/>
+            </OverflowToolbar>
+
+            <VBox class="heroPanel" width="100%">
+              <HBox class="heroLayout" width="100%" wrap="Wrap" alignItems="Center">
+                <VBox class="heroCopy">
+                  <ObjectStatus text="A LITTLE LOVE GOES A LONG WAY" icon="sap-icon://heart" state="Success" class="eyebrow"/>
+                  <Title text="Your new best friend is waiting." level="H1" class="heroTitle"/>
+                  <Text text="Meet rescue animals with big hearts and stories still being written. Find a companion who fits your life — and give them a place to call home." wrapping="true" class="heroText"/>
+                  <HBox wrap="Wrap" class="heroActions" alignItems="Center">
+                    <Button text="Meet the animals" type="Emphasized" icon="sap-icon://arrow-down" press=".onBrowse" class="primaryHeroButton"/>
+                    <ObjectStatus text="Adoption starts with a hello" icon="sap-icon://home" state="None"/>
+                  </HBox>
+                  <HBox class="statRow" wrap="Wrap">
+                    <VBox class="heroStat"><ObjectNumber number="{/kpis/available}"/><Text text="Friends ready to meet"/></VBox>
+                    <VBox class="heroStat"><ObjectNumber number="{/kpis/requests}"/><Text text="Adoption requests"/></VBox>
+                    <VBox class="heroStat"><ObjectNumber number="{/kpis/adopted}"/><Text text="Happy endings"/></VBox>
+                  </HBox>
+                </VBox>
+                <VBox class="heroPhotoFrame">
+                  <Image src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&amp;fit=crop&amp;w=1200&amp;q=90" alt="Happy dog looking for a loving home" decorative="false" densityAware="false" width="100%" class="heroPhoto"/>
+                  <HBox class="photoBadge" alignItems="Center">
+                    <core:Icon src="sap-icon://heart" size="1rem"/>
+                    <VBox><Title text="Small paws. Big love." level="H4"/><Text text="A lifetime of memories starts here."/></VBox>
+                  </HBox>
+                </VBox>
+              </HBox>
+            </VBox>
+
+            <VBox id="browseSection" class="contentSection">
+              <HBox class="sectionIntro" alignItems="End" justifyContent="SpaceBetween" wrap="Wrap">
+                <VBox>
+                  <ObjectStatus text="YOUR NEXT CHAPTER" state="Success" class="eyebrow"/>
+                  <Title text="Find your kind of wonderful" level="H2" class="sectionTitle"/>
+                  <Text text="Browse the animals, learn a little about them, and send an adoption request when someone feels right." wrapping="true" class="sectionSubtitle"/>
+                </VBox>
+                <ObjectStatus text="Photos &amp; profiles" icon="sap-icon://picture" state="Information"/>
+              </HBox>
+              <HBox class="filterBar" wrap="Wrap" alignItems="Center">
+                <SearchField id="animalSearch" width="min(100%, 22rem)" placeholder="Search by name, breed or species" liveChange=".onSearch" search=".onSearch"/>
+                <Select id="speciesFilter" width="10rem" selectedKey="All" change=".onSpeciesChange">
+                  <core:Item key="All" text="All animals"/>
+                  <core:Item key="Dog" text="Dogs"/>
+                  <core:Item key="Cat" text="Cats"/>
+                  <core:Item key="Other" text="Other"/>
+                </Select>
+                <ToolbarSpacer/>
+                <Text text="{/messages/animals}" class="resultsText"/>
+              </HBox>
+              <MessageStrip text="{/messages/loadError}" type="Error" showIcon="true" showCloseButton="true" visible="{/messages/hasError}" class="loadError"/>
+              <FlexBox id="animalGrid" items="{/animals}" wrap="Wrap" justifyContent="Start" class="animalGrid">
+                <items>
+                  <VBox class="animalCard" width="100%">
+                    <VBox class="animalImageWrap">
+                      <Image src="{photo}" alt="{name}" decorative="false" densityAware="false" width="100%" class="animalPhoto"/>
+                      <ObjectStatus text="{animalStatus}" state="{= ${animalStatus} === 'Available' ? 'Success' : (${animalStatus} === 'Adopted' ? 'Information' : 'Warning') }" class="animalStatusBadge"/>
+                    </VBox>
+                    <VBox class="animalDetails">
+                      <HBox alignItems="Start" justifyContent="SpaceBetween">
+                        <VBox><Title text="{name}" level="H3" class="animalName"/><Text text="{breed}" class="animalBreed"/></VBox>
+                        <core:Icon src="{= ${species} === 'Cat' ? 'sap-icon://tag' : 'sap-icon://heart'}" class="speciesIcon"/>
+                      </HBox>
+                      <HBox class="animalMeta" wrap="Wrap">
+                        <ObjectStatus text="{species}" icon="sap-icon://information" state="None"/>
+                        <ObjectStatus text="{gender}" icon="sap-icon://person-placeholder" state="None"/>
+                        <ObjectStatus text="{= ${age} === 1 ? '1 year old' : ${age} + ' years old'}" icon="sap-icon://history" state="None"/>
+                      </HBox>
+                      <Text text="{description}" wrapping="true" class="animalDescription" maxLines="3"/>
+                      <HBox class="animalFooter" alignItems="Center" justifyContent="SpaceBetween">
+                        <ObjectStatus text="{vaccinationStatus}" icon="sap-icon://accept" state="Success"/>
+                        <Button text="Meet {name}" type="Emphasized" icon="sap-icon://arrow-right" iconFirst="false" enabled="{= ${animalStatus} === 'Available'}" press=".onApply" class="meetButton"/>
+                      </HBox>
+                    </VBox>
+                  </VBox>
+                </items>
+              </FlexBox>
+              <VBox class="emptyState" visible="{= ${/animals}.length === 0 }" alignItems="Center">
+                <core:Icon src="sap-icon://search" size="2rem"/>
+                <Title text="No animals found" level="H3"/>
+                <Text text="Try another name or change the species filter."/>
+              </VBox>
+            </VBox>
+
+            <VBox class="contentSection secondarySection">
+              <IconTabBar id="managementTabs" expandable="false" selectedKey="requests" class="managementTabs">
+                <items>
+                  <IconTabFilter key="requests" text="Adoption requests" icon="sap-icon://document-text">
+                    <VBox class="tabPanel">
+                      <Title text="Your adoption journey" level="H2" class="sectionTitle"/>
+                      <Text text="Requests submitted through this demo appear here with their current status." wrapping="true" class="sectionSubtitle"/>
+                      <Table id="requestsTable" items="{/requests}" noDataText="No adoption requests yet. Choose an animal above to start." growing="true" growingThreshold="8" class="requestsTable">
+                        <columns>
+                          <Column><Text text="Applicant"/></Column>
+                          <Column><Text text="Animal"/></Column>
+                          <Column><Text text="Submitted"/></Column>
+                          <Column><Text text="Status"/></Column>
+                        </columns>
+                        <items>
+                          <ColumnListItem>
+                            <cells>
+                              <VBox><Text text="{applicantName}"/><Text text="{applicantEmail}" class="tableSecondary"/></VBox>
+                              <Text text="{animalName}"/>
+                              <Text text="{applicationDate}"/>
+                              <ObjectStatus text="{status}" state="{= ${status} === 'Approved' ? 'Success' : (${status} === 'Rejected' ? 'Error' : 'Information') }"/>
+                            </cells>
+                          </ColumnListItem>
+                        </items>
+                      </Table>
+                    </VBox>
+                  </IconTabFilter>
+                  <IconTabFilter key="admin" text="Shelter dashboard" icon="sap-icon://shield">
+                    <VBox class="tabPanel">
+                      <HBox alignItems="Center" justifyContent="SpaceBetween" wrap="Wrap">
+                        <VBox><Title text="Shelter overview" level="H2" class="sectionTitle"/><Text text="A lightweight demo workspace for reviewing adoption requests." class="sectionSubtitle"/></VBox>
+                        <ObjectStatus text="Demo admin mode" icon="sap-icon://locked" state="Warning"/>
+                      </HBox>
+                      <MessageStrip text="For local demonstration only. Before production, enforce admin authorization for all status updates on the backend." type="Warning" showIcon="true" class="adminWarning"/>
+                      <HBox class="kpiGrid" wrap="Wrap">
+                        <VBox class="kpiCard"><Text text="Animals in care"/><ObjectNumber number="{/kpis/total}"/><ObjectStatus text="All profiles" icon="sap-icon://activity-items" state="Information"/></VBox>
+                        <VBox class="kpiCard"><Text text="Available"/><ObjectNumber number="{/kpis/available}" state="Success"/><ObjectStatus text="Ready to meet" icon="sap-icon://heart" state="Success"/></VBox>
+                        <VBox class="kpiCard"><Text text="Pending requests"/><ObjectNumber number="{/kpis/pending}" state="Warning"/><ObjectStatus text="Need review" icon="sap-icon://pending" state="Warning"/></VBox>
+                        <VBox class="kpiCard"><Text text="Adopted"/><ObjectNumber number="{/kpis/adopted}" state="Information"/><ObjectStatus text="Happy endings" icon="sap-icon://home" state="Information"/></VBox>
+                      </HBox>
+                      <Title text="Recent applications" level="H3" class="subsectionTitle"/>
+                      <Table id="adminRequestsTable" items="{/requests}" noDataText="No requests to review." growing="true" growingThreshold="8" class="requestsTable">
+                        <columns>
+                          <Column><Text text="Applicant"/></Column>
+                          <Column><Text text="Animal"/></Column>
+                          <Column><Text text="Status"/></Column>
+                          <Column hAlign="End"><Text text="Review"/></Column>
+                        </columns>
+                        <items>
+                          <ColumnListItem>
+                            <cells>
+                              <VBox><Text text="{applicantName}"/><Text text="{applicantEmail}" class="tableSecondary"/></VBox>
+                              <Text text="{animalName}"/>
+                              <ObjectStatus text="{status}" state="{= ${status} === 'Approved' ? 'Success' : (${status} === 'Rejected' ? 'Error' : 'Information') }"/>
+                              <HBox justifyContent="End" class="reviewActions">
+                                <Button text="Approve" type="Accept" enabled="{= ${status} !== 'Approved' &amp;&amp; ${status} !== 'Rejected'}" press=".onApprove"/>
+                                <Button text="Decline" type="Reject" enabled="{= ${status} !== 'Approved' &amp;&amp; ${status} !== 'Rejected'}" press=".onReject"/>
+                              </HBox>
+                            </cells>
+                          </ColumnListItem>
+                        </items>
+                      </Table>
+                    </VBox>
+                  </IconTabFilter>
+                </items>
+              </IconTabBar>
+            </VBox>
+
+            <HBox class="siteFooter" alignItems="Center" justifyContent="SpaceBetween" wrap="Wrap">
+              <HBox alignItems="Center" class="footerBrand"><core:Icon src="sap-icon://heart-2"/><Title text="Paw Haven" level="H4"/></HBox>
+              <Text text="Built with care for animals and the people who love them."/>
+              <ObjectStatus text="SAPUI5 · CAP · OData V4" state="Information"/>
+            </HBox>
+          </VBox>
+        </content>
+      </Page>
+    </pages>
+  </App>
+</mvc:View>
